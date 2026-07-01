@@ -1,0 +1,46 @@
+Auth
+    controller
+        AuthController ---> Controller for login/register
+    dto
+        LoginRequest ---> Entity with the login information
+        LoginResponse ---> Login response
+        RegisterRequest ---> Entity with the sing-up information
+    security
+        JwtService ---> Create JWT token
+    service
+        AuthService ---> Service to register and Login
+
+Common
+config
+    SecurityConfig ---> Create a bean for the password encode and security for who can access to the endpoints
+
+user
+    entity
+        User ---> Entity for User on the DB, JPA and Hibernate administrate the representation from a user on the DB
+        Role ---> Mange the role for each user
+    repository
+        UserRepository ---> JPA repository with the basic crud to mange the db and let us create new queries
+
+application.yaml
+    ---> Information about db and hibernate
+
+WorkFlow - Sing-up
+Controller /register (AuthController)
+-> Call Service register function using the right dto (LoginRequest)(AuthService)
+-> register call the repository to valida if the user is already register(UserRepository), if no;
+    create new user(User)
+    assign a role(role)
+    hashing the password using SecurityConfig and PasswordEncoder
+    save(UserRepository)
+
+WorkFlow - Login
+Controller /login (AuthController)
+-> Call Service login function using the right dto (RegisterRequest)(AuthService)
+-> register call the repository to validate if the user and password(validate using PasswordEncoder) match, if yes;
+    generate a token (JwtService)
+    return token
+
+
+
+
+
