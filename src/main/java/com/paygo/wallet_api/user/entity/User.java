@@ -1,5 +1,6 @@
 package com.paygo.wallet_api.user.entity;
 
+import com.paygo.wallet_api.wallet.entity.Wallet;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,6 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -35,4 +37,7 @@ public class User {
     private Role role;
 
     private LocalDateTime createdAt;
+
+    @OneToOne(mappedBy = "user")
+    private Wallet wallet;
 }

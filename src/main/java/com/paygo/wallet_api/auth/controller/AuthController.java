@@ -1,7 +1,7 @@
 package com.paygo.wallet_api.auth.controller;
 
 import com.paygo.wallet_api.auth.dto.LoginRequest;
-import com.paygo.wallet_api.auth.dto.LoginResponse;
+import com.paygo.wallet_api.auth.dto.AuthResponse;
 import com.paygo.wallet_api.auth.dto.RegisterRequest;
 import com.paygo.wallet_api.auth.service.AuthService;
 import jakarta.validation.Valid;
@@ -19,13 +19,13 @@ public class AuthController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public void register(@Valid @RequestBody RegisterRequest request){
-        authService.register(request);
+    public AuthResponse register(@Valid @RequestBody RegisterRequest request){
+        return authService.register(request);
     }
 
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.CREATED)
-    public LoginResponse register(@Valid @RequestBody LoginRequest request){
+    public AuthResponse register(@Valid @RequestBody LoginRequest request){
         return authService.login(request);
     }
 
